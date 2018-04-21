@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浮层控制显隐</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .layer {
+            width: 100px;
+            height: 60px;
+            background-color: white;
+            border: 1px solid red;
+            border-radius: 10px;
+            position: relative;
+            left: 55px;
+            top: -22px;
+            text-align: center;
+            line-height: 60px;
+            display: none;
+        }
+        .layer.active {
+            display: block;
+        }
+        .layer::before {
+            content:'';
+            display: block;
+            position: absolute;
+            right: 100%;
+            top: 10px;
+            border: 10px solid transparent;
+            border-right-color: red;  
+        }
+        .layer::after {
+            content:'';
+            display: block;
+            position: absolute;
+            right: 100%;
+            top: 11px;
+            border: 9px solid transparent;
+            border-right-color: white;  
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="clickMe">click</button>
+        <div class="layer">
+            <label>
+                <input type="checkbox">haha
+            </label>
+        </div>
+    </div>
+
+    <script>
+        $('#clickMe').on('click',function(e){
+            e.stopPropagation()
+            $('.layer').toggleClass('active')
+        })
+        $('.layer').on('click',function(e){
+            e.stopPropagation()
+        })
+        $(document).on('click',function(){
+            $('.layer').removeClass('active')
+        })
+    </script>
+</body>
+</html>
